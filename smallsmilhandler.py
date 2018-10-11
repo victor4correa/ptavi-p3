@@ -17,16 +17,17 @@ class SmallSMILHandler(ContentHandler):
                          "textstream": atb_textstream}        
         self.datos = []
         
-    def inEtiqueta(self, name, attrs):
+    def startElement(self, name, attrs):
        
         if name in self.etiquetas:
 
             for atb in self.etiquetas[name]:
-                self.etiquetas[name][atb] = attrs.get(atb, "") 
+                self.etiquetas[name][atb] = attrs.get(atb, "")
+            self.datos.append(self.etiquetas)
                 
     def get_tags (self):
         
-        print(self.etiquetas)
+        print(self.datos)
 
                   
             
