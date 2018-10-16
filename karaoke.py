@@ -35,13 +35,13 @@ if __name__ == "__main__":
                 archivo_smil.append(lista_final + '\n')
                 
             for linea in listavalores:
-                lista_final = []
                 etiqueta = linea[0]
                 for atributo, valor in linea[1].items():
                     if valor[:7] == "http://":
-                        urlretrieve(valor, valor.split("/")[-1])
+                        name_local = valor.split('/')[-1]
+                        urlretrieve(valor, name_local)
                         print("Descargando %s..." % valor)
-                
+                        
                 
         """fjson = json.dumps(archivo_smil)
         print(fjson)"""
