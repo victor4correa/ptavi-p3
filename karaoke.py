@@ -9,7 +9,7 @@ import sys
 import json
 from xml.sax import make_parser
 from smallsmilhandler import SmallSMILHandler
-
+from urllib.request import urlretrieve
 
 if __name__ == "__main__":
     
@@ -30,11 +30,22 @@ if __name__ == "__main__":
                 etiqueta = linea[0]
                 lista_final.append(etiqueta)
                 for atributo, valor in linea[1].items():
-                    lista_final.append (atributo + "=" + '"' + valor + '"')
-                lista_final = '\\'.join(lista_final)
+                    lista_final.append (atributo + "=" + '"' + valor + '"')   
+                lista_final = '\t'.join(lista_final)
                 archivo_smil.append(lista_final + '\n')
-        file_json = json.dumps(archivo_smil)
-        print(file_json)
+                
+            for linea in listavalores:
+                lista_final = []
+                etiqueta = linea[0]
+                for atributo, valor in linea[1].items():
+                    if valor[:7] == "http://":
+                        urlretrieve(valor, valor.split("/")[-1])
+                        print("Descargando %s..." % valor)
+                
+                
+        """fjson = json.dumps(archivo_smil)
+        print(fjson)"""
+        
                 
                 
                 
